@@ -1,0 +1,15 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  labels:
+      app: busybox-sample
+  name: busybox-placement
+spec:
+  clusterSelector:
+    matchLabels:
+      'usage': 'test'
+  clusterConditions:
+    - type: ManagedClusterConditionAvailable
+      status: "True"
+  clusterReplicas: 1

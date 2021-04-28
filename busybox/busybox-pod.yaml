@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+  labels:
+    appname: busybox
+spec:
+  containers:
+    - name: busybox
+      image: busybox
+      command: ['sh', '-c', 'echo "Hello, Kubernetes!" && sleep 3600']
+      volumeMounts:
+        - name: mypvc
+          mountPath: /mnt/test
+  volumes:
+    - name: mypvc
+      persistentVolumeClaim:
+        claimName: busybox-pvc
+        readOnly: false
