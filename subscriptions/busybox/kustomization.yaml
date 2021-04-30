@@ -4,3 +4,5 @@ resources:
 - application.yaml
 - placementrule.yaml
 - subscription.yaml
+- drclusterpeers.yaml
+- avr.yaml

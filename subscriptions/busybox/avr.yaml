@@ -3,11 +3,9 @@ apiVersion: ramendr.openshift.io/v1alpha1
 kind: ApplicationVolumeReplication
 metadata:
   name: avr-test-for-busybox-subs
-  namespace: busybox-sample
 spec:
-  clusterPeersRef:
+  drClusterPeersRef:
     name: dr-peers-for-busybox-app
-    namespace: busybox-sample
   placement:
       placementRef:
         kind: PlacementRule

@@ -1,11 +1,10 @@
 ---
 apiVersion: ramendr.openshift.io/v1alpha1
-kind: ClusterPeers
+kind: DRClusterPeers
 metadata:
   name: dr-peers-for-busybox-app
-  namespace: busybox-sample
 spec:
   clusterNames:
-  - east-cluster
-  - west-cluster
+  - hub
+  - cluster1
   replicationPolicy: async
