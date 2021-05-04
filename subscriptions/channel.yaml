@@ -5,4 +5,4 @@ metadata:
   name: ramen-gitops
 spec:
   type: GitHub
-  pathname: https://github.com/ramendr/ocm-ramen-samples.git
+  pathname: https://github.com/ShyamsundarR/ocm-ramen-samples.git

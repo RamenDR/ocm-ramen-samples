@@ -1,0 +1,10 @@
+---
+apiVersion: ramendr.openshift.io/v1alpha1
+kind: DRClusterPeers
+metadata:
+  name: busybox-drpeers
+spec:
+  clusterNames:
+  - hub
+  - cluster1
+  replicationPolicy: async

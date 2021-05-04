@@ -2,23 +2,22 @@
 apiVersion: ramendr.openshift.io/v1alpha1
 kind: ApplicationVolumeReplication
 metadata:
-  name: avr-test-for-busybox-subs
-  namespace: busybox-sample
+  name: busybox-avr
+  labels:
+    app: busybox-sample
 spec:
-  clusterPeersRef:
-    name: dr-peers-for-busybox-app
-    namespace: busybox-sample
+  drClusterPeersRef:
+    name: busybox-drpeers
   placement:
       placementRef:
         kind: PlacementRule
         name: busybox-placement
   pvcSelector:
     matchLabels:
-      appclass: gold
-      environment: dev.AZ1
-  s3Endpoint: path/to/s3Endpoint
-  s3Region: "us-west"
-  s3SecretName: SecretName
+      appname: busybox
+  s3Endpoint: "http://192.168.39.75:30000"
+  s3Region: "fake"
+  s3SecretName: busybox-s3secret
   subscriptionSelector:
     matchLabels:
       app: busybox-sample

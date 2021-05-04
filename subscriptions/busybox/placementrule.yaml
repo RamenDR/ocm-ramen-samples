@@ -2,13 +2,14 @@
 apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
-  labels:
-      app: busybox-sample
   name: busybox-placement
+  labels:
+    app: busybox-sample
 spec:
+  schedulerName: "ramen"
   clusterSelector:
     matchLabels:
-      'usage': 'test'
+      'region': 'west'
   clusterConditions:
     - type: ManagedClusterConditionAvailable
       status: "True"
