@@ -1,6 +1,5 @@
 namespace: busybox-sample
 resources:
-- namespace.yaml
-- application.yaml
 - placementrule.yaml
 - subscription.yaml
+- drpc.yaml

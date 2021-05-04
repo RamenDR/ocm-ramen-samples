@@ -1,0 +1,9 @@
+---
+apiVersion: ramendr.openshift.io/v1alpha1
+kind: DRPolicy
+metadata:
+  name: dr-policy
+spec:
+  clusterNames:
+  - hub
+  - cluster1

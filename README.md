@@ -10,9 +10,13 @@ OCM Stateful application samples, including Ramen resources.
 1. Switch kubeconfig to point to the OCM Hub cluster
 1. Setup the common OCM channel resources on the hub:
     - `kubectl apply -k subscriptions/`
-    - The above creates the the channel resource in the `ramen-samples`
-    namespace and can be viewed using:
-        - `kubectl get channel -n ramen-samples ramen-gitops`
+    - The above creates:
+        - A channel resource in the `ramen-samples`
+        namespace and can be viewed using:
+            - `kubectl get channel -n ramen-samples ramen-gitops`
+        - A DRPolicy resource in the cluster namespace and can
+        be viewed using:
+            - `kubectl get drpolicy`
 
 ## Sample application deployment
 
@@ -20,10 +24,11 @@ OCM Stateful application samples, including Ramen resources.
   example:
     - `kubectl apply -k subscriptions/busybox/`
     - The above creates the required Subscription, PlacementRule and
-    Application resources for the busybox application in the
+    DRPlacementControl resources for the busybox application in the
     `busybox-sample` namespace and can be viewed using:
         - `kubectl get placementrule -n busybox-sample`
         - `kubectl get -n busybox-sample subscriptions`
+        - `kubectl get drplacementcontrol -n busybox-sample`
 1. Inspect subscribed resources from the channel created in the same namespace
   on the ManagedCluster selected by the PlacementRule, for example:
     - The busybox sample PlacementRule `status` can be viewed on the hub

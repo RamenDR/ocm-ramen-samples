@@ -1,5 +1,5 @@
 namespace: ramen-samples
 resources:
-- namespace.yaml
 - channel.yaml
-
+- namespace.yaml
+- drpolicy.yaml

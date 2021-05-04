@@ -7,7 +7,7 @@ metadata:
     appname: busybox
 spec:
   accessModes: [ "ReadWriteOnce" ]
-  storageClassName: "standard"
+  storageClassName: "rook-ceph-block"
   resources:
     requests:
       storage: 1Gi
