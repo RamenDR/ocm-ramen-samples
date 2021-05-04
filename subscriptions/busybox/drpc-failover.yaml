@@ -1,0 +1,24 @@
+---
+apiVersion: ramendr.openshift.io/v1alpha1
+kind: DRPlacementControl
+metadata:
+  name: busybox-drpc
+  namespace: busybox-sample
+  labels:
+    app: busybox-sample
+spec:
+  preferredCluster: "cluster1"
+  action: "Failover"
+  failoverCluster: "hub"
+  drPolicyRef:
+    name: dr-policy
+  placement:
+      placementRef:
+        kind: PlacementRule
+        name: busybox-placement
+  pvcSelector:
+    matchLabels:
+      appname: busybox
+  s3Endpoint: "http://192.168.39.32:30000"
+  s3Region: "fake"
+  s3SecretName: busybox-s3secret
