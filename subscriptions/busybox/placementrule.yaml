@@ -6,7 +6,6 @@ metadata:
   labels:
     app: busybox-sample
 spec:
-  schedulerName: "ramen"
   clusterSelector:
     matchLabels:
       'region': 'west'
