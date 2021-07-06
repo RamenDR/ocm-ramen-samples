@@ -12,10 +12,9 @@ spec:
   failoverCluster: "hub"
   drPolicyRef:
     name: dr-policy
-  placement:
-      placementRef:
-        kind: PlacementRule
-        name: busybox-placement
+  placementRef:
+    kind: PlacementRule
+    name: busybox-placement
   pvcSelector:
     matchLabels:
       appname: busybox

@@ -9,6 +9,7 @@ spec:
   containers:
     - name: busybox
       image: busybox
+      imagePullPolicy: IfNotPresent
       command: ['sh', '-c', 'echo "Hello, Kubernetes!" && sleep 3600']
       volumeMounts:
         - name: mypvc
