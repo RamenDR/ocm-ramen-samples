@@ -15,6 +15,3 @@ spec:
   pvcSelector:
     matchLabels:
       appname: busybox
-  s3Endpoint: "http://192.168.39.32:30000"
-  s3Region: "fake"
-  s3SecretName: busybox-s3secret
