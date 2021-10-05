@@ -1,12 +1,11 @@
----
 apiVersion: ramendr.openshift.io/v1alpha1
 kind: DRPolicy
 metadata:
-  name: dr-policy
+  name: odr-policy-ocp4perf1-ocp4perf1-5m
 spec:
   drClusterSet:
-  - name: hub
-    s3ProfileName: minio-on-hub
-  - name: cluster1
-    s3ProfileName: minio-on-hub
-  schedulingInterval: 1m
+  - name: ocp4perf1
+    s3ProfileName: s3-primary
+  - name: ocp4perf2
+    s3ProfileName: s3-secondary
+  schedulingInterval: 5m
