@@ -6,12 +6,12 @@ metadata:
   labels:
     app: busybox-sample
 spec:
-  preferredCluster: "ocp4perf1"
+  preferredCluster: "cluster1"
   drPolicyRef:
-    name: odr-policy-ocp4perf1-ocp4perf1-5m
+    name: dr-policy
   placementRef:
     kind: PlacementRule
     name: busybox-placement
   pvcSelector:
     matchLabels:
-      appname: busybox
+      appname: busybo
