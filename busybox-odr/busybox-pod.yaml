@@ -8,9 +8,9 @@ metadata:
 spec:
   containers:
     - name: busybox
-      image: busybox
+      image: quay.io/vcppds7878/busybox:latest 
       imagePullPolicy: IfNotPresent
-      command: ['sh', '-c', 'while true; do echo $(date) | tee -a /mnt/test/outfile; sync; sleep 10; done']
+      command: ['sh', '-c', 'while true; do echo $(date) | tee -a /mnt/test/outfile; sync; sleep 1; done']
       volumeMounts:
         - name: mypvc
           mountPath: /mnt/test
