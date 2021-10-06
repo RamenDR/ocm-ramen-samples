@@ -14,4 +14,4 @@ spec:
     name: busybox-placement
   pvcSelector:
     matchLabels:
-      appname: busybo
+      appname: busybox
