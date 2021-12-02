@@ -1,0 +1,21 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+  labels:
+    appname: busybox
+spec:
+  containers:
+    - name: busybox
+      image: quay.io/vcppds7878/busybox:latest 
+      imagePullPolicy: IfNotPresent
+      command: ['sh', '-c', 'while true; do echo $(date) | tee -a /mnt/test/outfile; sync; sleep 1; done']
+      volumeMounts:
+        - name: mypvc
+          mountPath: /mnt/test
+  volumes:
+    - name: mypvc
+      persistentVolumeClaim:
+        claimName: busybox-pvc
+        readOnly: false
