@@ -6,7 +6,9 @@ metadata:
 spec:
   drClusterSet:
   - name: hub
+    region: east
     s3ProfileName: minio-on-hub
   - name: cluster1
+    region: west
     s3ProfileName: minio-on-hub
   schedulingInterval: 1m
