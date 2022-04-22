@@ -2,4 +2,6 @@ namespace: ramen-samples
 resources:
 - channel.yaml
 - namespace.yaml
+- drcluster-hub.yaml
+- drcluster-cluster1.yaml
 - drpolicy.yaml
