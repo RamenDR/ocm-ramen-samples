@@ -4,9 +4,7 @@ kind: DRPolicy
 metadata:
   name: dr-policy
 spec:
-  drClusterSet:
-  - name: hub
-    s3ProfileName: minio-on-hub
-  - name: cluster1
-    s3ProfileName: minio-on-hub
+  drClusters:
+  - hub
+  - cluster1
   schedulingInterval: 1m

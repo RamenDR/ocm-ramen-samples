@@ -1,0 +1,7 @@
+---
+apiVersion: ramendr.openshift.io/v1alpha1
+kind: DRCluster
+metadata:
+  name: cluster1
+spec:
+  s3ProfileName: minio-on-cluster1
