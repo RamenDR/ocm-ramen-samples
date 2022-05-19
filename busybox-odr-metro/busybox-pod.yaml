@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
     - name: busybox
-      image: quay.io/vcppds7878/busybox:latest 
+      image: docker.io/ppc64le/busybox:latest 
       imagePullPolicy: IfNotPresent
       command: ['sh', '-c', 'while true; do echo $(date) | tee -a /mnt/test/outfile; sync; sleep 1; done']
       volumeMounts:
