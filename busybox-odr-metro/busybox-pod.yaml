@@ -12,9 +12,9 @@ spec:
       type: RuntimeDefault
   containers:
     - name: busybox
-      image: quay.io/vcppds7878/busybox:latest 
+      image: quay.io/vcppds7878/busybox:latest
       imagePullPolicy: IfNotPresent
-      command: ['sh', '-c', 'while true; do echo $(date) | tee -a /mnt/test/outfile; sync; sleep 1; done']
+      command: ['sh', '-c', 'trap exit TERM; while true; do echo $(date) | tee -a /mnt/test/outfile; sync; sleep 1; done']
       securityContext:
         allowPrivilegeEscalation: false
         capabilities:
