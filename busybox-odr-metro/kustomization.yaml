@@ -1,5 +1,4 @@
 ---
 resources:
 - busybox-pvc.yaml
-- busybox-service.yaml
 - busybox-deployment.yaml
