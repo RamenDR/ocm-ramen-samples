@@ -8,15 +8,19 @@ OCM Stateful application samples, including Ramen resources.
     - `https://github.com/RamenDR/ocm-ramen-samples.git`
   `cd ocm-ramen-samples`
 1. Switch kubeconfig to point to the OCM Hub cluster
+1. If ramen is not configured, configure it using:
+    - `kubectl apply -k ramen/`
+    - The above creates DRPolicy and DRCluster resources in the
+      cluster namespace that can be viewed using:
+        - `kubectl get drcluster`
+        - `kubectl get drpolicy`
+    - Modify the DRCluster and DRPolicy resources to match the actual
+      cluster names.
 1. Setup the common OCM channel resources on the hub:
     - `kubectl apply -k subscriptions/`
-    - The above creates:
-        - A channel resource in the `ramen-samples`
-        namespace and can be viewed using:
-            - `kubectl get channel -n ramen-samples ramen-gitops`
-        - A DRPolicy resource in the cluster namespace and can
-        be viewed using:
-            - `kubectl get drpolicy`
+    - The above creates a Channel resource in the `ramen-samples`
+      namespace and can be viewed using:
+        - `kubectl get channel -n ramen-samples ramen-gitops`
 
 ## Sample application deployment
 
