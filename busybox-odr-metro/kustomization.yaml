@@ -1,4 +1,12 @@
 ---
 resources:
-- busybox-pvc.yaml
-- busybox-deployment.yaml
+- ../busybox
+
+patches:
+- target:
+    kind: PersistentVolumeClaim
+    name: busybox-pvc
+  patch: |-
+    - op: replace
+      path: /spec/storageClassName
+      value: ocs-external-storagecluster-ceph-rbd
