@@ -10,4 +10,3 @@ spec:
     - type: ManagedClusterConditionAvailable
       status: "True"
   clusterReplicas: 1
-  schedulerName: "ramen"
