@@ -27,16 +27,16 @@ OCM Stateful application samples, including Ramen resources.
 1. Deploy an OCM application and its related resources on the hub, for
   example:
     - `kubectl apply -k subscription/`
-    - The above creates the required Subscription and PlacementRule
-    resources for the busybox application in the `busybox-sample`
-    namespace and can be viewed using:
-        - `kubectl get placementrule -n busybox-sample`
+    - The above creates the required Subscription, Placement, and
+    ManagedClusterSetBinding resources for the busybox application in
+    the `busybox-sample` namespace and can be viewed using:
+        - `kubectl get placement -n busybox-sample`
         - `kubectl get -n busybox-sample subscriptions`
 1. Inspect subscribed resources from the channel created in the same namespace
-  on the ManagedCluster selected by the PlacementRule, for example:
-    - The busybox sample PlacementRule `status` can be viewed on the hub
+  on the ManagedCluster selected by the Placement, for example:
+    - The busybox sample Placement `status` can be viewed on the hub
     using:
-        - `kubectl get placementrule -n busybox-sample busybox-placement`
+        - `kubectl get placement -n busybox-sample busybox-placement`
     - Busybox subscribed resources, like the pod and the PVC can be viewed on
     the ManagedCluster using (example ManagedCluster `cluster1`):
         - `kubectl --context=cluster1 get pods busybox-sample`
@@ -49,8 +49,13 @@ To undeploy the application delete the subscription kustomization:
 
 ## Enable DR for the OCM application
 
-1. Change the PlacementRule to be reconciled by Ramen
-    - `kubectl patch placementrule busybox-placement -n busybox-sample --patch '{"spec": {"schedulerName": "ramen"}}' --type merge`
+1. Change the Placement to be reconciled by Ramen
+
+    ```
+    kubectl annotate placement busybox-placement -n busybox-sample \
+       cluster.open-cluster-management.io/experimental-scheduling-disable=true
+    ```
+
 1. Deploy a DRPlacementControl resource for the OCM application on the
    hub, for example:
     - `kubectl apply -k dr/`
@@ -62,7 +67,7 @@ To undeploy the application delete the subscription kustomization:
 
 ## Disable DR for the OCM application
 
-1. Ensure PlacementRule is pointing to the cluster where the workload is
+1. Ensure Placement is pointing to the cluster where the workload is
    currently placed to avoid data loss if OCM moves the application to
    another cluster.
    - The sample `busybox-placement` does not require any change.
@@ -70,8 +75,13 @@ To undeploy the application delete the subscription kustomization:
     - `kubectl delete -k dr/`
     - The above deletes the DRPlacementControl resource for the busybox
     application, disabling replication and removing replicated data.
-1. Edit the `busybox-placement` resource and remove the `spec.schedulerName` property:
-    - `kubectl patch placementrule busybox-placement -n busybox-sample --patch '{"spec": {"schedulerName": null}}' --type merge`
+1. Change the Placement to be reconciled by OCM
+
+    ```
+    kubectl annotate placement busybox-placement -n busybox-sample \
+        cluster.open-cluster-management.io/experimental-scheduling-disable-
+    ```
+
     - At this point the application is managed again by *OCM*.
 
 ## Testing failover

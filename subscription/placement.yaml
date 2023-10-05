@@ -1,0 +1,9 @@
+---
+apiVersion: cluster.open-cluster-management.io/v1beta1
+kind: Placement
+metadata:
+  name: busybox-placement
+spec:
+  clusterSets:
+  - default
+  numberOfClusters: 1
