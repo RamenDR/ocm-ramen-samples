@@ -17,7 +17,20 @@ spec:
         - name: logger
           image: quay.io/nirsof/busybox:stable
           imagePullPolicy: IfNotPresent
-          command: ['sh', '-c', 'trap exit TERM; while true; do echo $(date) | tee -a /var/log/ramen.log; sync; sleep 10 & wait; done']
+          command:
+            - sh
+            - -c
+            - |
+              emit() {
+                  echo "$(date) $1" | tee -a /var/log/ramen.log
+                  sync
+              }
+              trap "emit STOP; exit" TERM
+              emit START
+              while true; do
+                  sleep 10 & wait
+                  emit UPDATE
+              done
           volumeMounts:
             - name: varlog
               mountPath: /var/log
