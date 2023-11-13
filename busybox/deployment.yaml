@@ -2,8 +2,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    appname: busybox
   name: busybox
 spec:
   replicas: 1
