@@ -1,3 +1,5 @@
 namespace: busybox-sample
 resources:
 - drpc.yaml
+commonLabels:
+  app: busybox-sample
