@@ -14,14 +14,14 @@ spec:
         appname: busybox
     spec:
       containers:
-      - image: quay.io/nirsof/busybox:stable
-        imagePullPolicy: IfNotPresent
-        name: busybox
-        command: ['sh', '-c', 'trap exit TERM; while true; do echo $(date) | tee -a /mnt/test/outfile; sync; sleep 10 & wait; done']
-        volumeMounts:
-          - name: mypvc
-            mountPath: /mnt/test
+        - name: logger
+          image: quay.io/nirsof/busybox:stable
+          imagePullPolicy: IfNotPresent
+          command: ['sh', '-c', 'trap exit TERM; while true; do echo $(date) | tee -a /var/log/ramen.log; sync; sleep 10 & wait; done']
+          volumeMounts:
+            - name: varlog
+              mountPath: /var/log
       volumes:
-        - name: mypvc
+        - name: varlog
           persistentVolumeClaim:
             claimName: busybox-pvc
