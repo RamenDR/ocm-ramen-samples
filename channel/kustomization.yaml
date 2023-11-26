@@ -1,3 +1,4 @@
+---
 resources:
-- channel.yaml
-- namespace.yaml
+  - channel.yaml
+  - namespace.yaml
