@@ -1,8 +1,9 @@
+---
 resources:
-- namespace.yaml
-- binding.yaml
-- placement.yaml
-- subscription.yaml
+  - namespace.yaml
+  - binding.yaml
+  - placement.yaml
+  - subscription.yaml
 namespace: busybox-sample
 commonLabels:
   app: busybox-sample
