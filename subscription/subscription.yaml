@@ -4,11 +4,11 @@ kind: Subscription
 metadata:
   annotations:
     apps.open-cluster-management.io/github-branch: main
-    apps.open-cluster-management.io/github-path: busybox
+    apps.open-cluster-management.io/github-path: busybox/deployment
   name: busybox-sub
 spec:
-    channel: ramen-samples/ramen-gitops
-    placement:
-      placementRef:
-        kind: Placement
-        name: busybox-placement
+  channel: busybox-sample/ocm-ramen-samples
+  placement:
+    placementRef:
+      kind: Placement
+      name: busybox-placement

@@ -1,4 +1,0 @@
----
-resources:
-- busybox-pvc.yaml
-- busybox-deployment.yaml

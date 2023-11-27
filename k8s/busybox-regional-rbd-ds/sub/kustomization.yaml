@@ -1,0 +1,19 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../../subscription
+namespace: busybox-regional-rbd-ds
+commonLabels:
+  app: busybox-regional-rbd-ds
+patches:
+  - target:
+      kind: Subscription
+      name: busybox-sub
+    patch: |-
+      - op: replace
+        path: /metadata/annotations/apps.open-cluster-management.io~1github-path
+        value: k8s/busybox-regional-rbd-ds/app
+      - op: replace
+        path: /spec/channel
+        value: busybox-regional-rbd-ds/ocm-ramen-samples

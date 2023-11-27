@@ -5,6 +5,6 @@ metadata:
   name: dr-policy
 spec:
   drClusters:
-  - cluster1
-  - cluster2
+    - cluster1
+    - cluster2
   schedulingInterval: 1m

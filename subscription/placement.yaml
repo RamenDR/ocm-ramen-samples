@@ -5,5 +5,5 @@ metadata:
   name: busybox-placement
 spec:
   clusterSets:
-  - default
+    - default
   numberOfClusters: 1

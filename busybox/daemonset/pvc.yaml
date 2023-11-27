@@ -3,11 +3,9 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: busybox-pvc
-  labels:
-    appname: busybox
 spec:
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
   storageClassName: rook-ceph-block
   resources:
     requests:
