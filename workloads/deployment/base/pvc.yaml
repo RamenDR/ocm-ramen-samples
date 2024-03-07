@@ -6,7 +6,8 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: rook-ceph-block
+  # Customize in your overlay.
+  storageClassName: STORAGE_CLASS_NAME
   resources:
     requests:
       storage: 1Gi

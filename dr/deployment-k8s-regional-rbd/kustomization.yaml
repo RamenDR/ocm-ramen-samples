@@ -1,0 +1,6 @@
+---
+resources:
+  - ../base
+namespace: deployment-rbd
+commonLabels:
+  app: deployment-rbd

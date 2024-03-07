@@ -1,11 +1,12 @@
 ---
 resources:
-  - ../busybox
+  - ../base
 patches:
+  # Customize for external ceph cluster.
   - target:
       kind: PersistentVolumeClaim
       name: busybox-pvc
     patch: |-
       - op: replace
         path: /spec/storageClassName
-        value: ocs-storagecluster-ceph-rbd
+        value: ocs-external-storagecluster-ceph-rbd
