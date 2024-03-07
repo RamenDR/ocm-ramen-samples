@@ -1,6 +1,6 @@
 ---
 resources:
-  - ../busybox
+  - ../base
 patches:
   - target:
       kind: PersistentVolumeClaim
@@ -8,4 +8,4 @@ patches:
     patch: |-
       - op: replace
         path: /spec/storageClassName
-        value: ocs-external-storagecluster-ceph-rbd
+        value: rook-ceph-block

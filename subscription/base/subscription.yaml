@@ -4,11 +4,12 @@ kind: Subscription
 metadata:
   annotations:
     apps.open-cluster-management.io/github-branch: main
-    apps.open-cluster-management.io/github-path: busybox
-  name: busybox-sub
+    # Customize in your overlay.
+    apps.open-cluster-management.io/github-path: PATH
+  name: subscription
 spec:
   channel: ramen-samples/ramen-gitops
   placement:
     placementRef:
       kind: Placement
-      name: busybox-placement
+      name: placement
