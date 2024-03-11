@@ -57,7 +57,8 @@ In the workloads directory provides samples that can be deployed on
 Kubernetes and OpenShift.
 
 - deployment - busybox deployment
-
+- kubevirt
+  - vm-pvc - PVC based VM
 
 ## Deploying a sample application
 

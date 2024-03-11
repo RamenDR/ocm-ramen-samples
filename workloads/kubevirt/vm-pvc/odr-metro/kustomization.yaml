@@ -1,0 +1,21 @@
+# Kustomization for OpenShift Metro DR environment.
+---
+resources:
+  - ../base
+patches:
+  # Use masquerade network interface.
+  - target:
+      kind: VirtualMachine
+      name: vm
+    patch: |-
+      - op: add
+        path: /spec/template/spec/domain/devices/interfaces/0/masquerade
+        value: {}
+  # Use external ceph cluster.
+  - target:
+      kind: PersistentVolumeClaim
+      name: root-disk
+    patch: |-
+      - op: replace
+        path: /spec/storageClassName
+        value: ocs-external-storagecluster-ceph-rbd

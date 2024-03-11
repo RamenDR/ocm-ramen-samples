@@ -1,0 +1,14 @@
+---
+resources:
+  - ../../base
+commonLabels:
+  appname: vm
+patches:
+  # Override appname to match our our label.
+  - target:
+      kind: DRPlacementControl
+      name: drpc
+    patch: |-
+      - op: replace
+        path: /spec/pvcSelector/matchLabels/appname
+        value: vm
