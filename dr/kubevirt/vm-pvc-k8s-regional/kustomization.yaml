@@ -1,0 +1,6 @@
+---
+resources:
+  - ../base
+namespace: vm-pvc
+commonLabels:
+  app: vm-pvc
