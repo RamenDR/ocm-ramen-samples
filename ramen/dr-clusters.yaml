@@ -2,13 +2,13 @@
 apiVersion: ramendr.openshift.io/v1alpha1
 kind: DRCluster
 metadata:
-  name: cluster1
+  name: dr1
 spec:
-  s3ProfileName: minio-on-cluster1
+  s3ProfileName: minio-on-dr1
 ---
 apiVersion: ramendr.openshift.io/v1alpha1
 kind: DRCluster
 metadata:
-  name: cluster2
+  name: dr2
 spec:
-  s3ProfileName: minio-on-cluster2
+  s3ProfileName: minio-on-dr2
