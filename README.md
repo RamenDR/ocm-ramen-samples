@@ -99,10 +99,10 @@ the examples.
 
    The Busybox deployment subscribed resources, like the pod and the PVC
    can be viewed on the ManagedCluster using (example ManagedCluster
-   `cluster1`):
+   `dr1`):
 
    ```
-   kubectl get pod,pvc -n deployment-rbd --context cluster1
+   kubectl get pod,pvc -n deployment-rbd --context dr1
    ```
 
 ## Undeploying a sample application
