@@ -8,3 +8,5 @@ spec:
     - dr1
     - dr2
   schedulingInterval: 1m
+  replicationClassSelector: {}
+  volumeSnapshotClassSelector: {}
