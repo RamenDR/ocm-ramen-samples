@@ -1,0 +1,12 @@
+---
+resources:
+  - vm.yaml
+  - dv.yaml
+commonLabels:
+  appname: vm
+secretGenerator:
+  - name: my-public-key
+    files:
+      - test_rsa.pub
+generatorOptions:
+  disableNameSuffixHash: true
