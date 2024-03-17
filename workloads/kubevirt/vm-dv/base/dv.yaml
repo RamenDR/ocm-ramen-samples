@@ -1,0 +1,17 @@
+---
+apiVersion: cdi.kubevirt.io/v1beta1
+kind: DataVolume
+metadata:
+  name: root-disk
+spec:
+  storage:
+    accessModes:
+      - ReadWriteMany
+    # Customize in your overlay.
+    storageClassName: STORAGE_CLASS_NAME
+    resources:
+      requests:
+        storage: 128Mi
+  source:
+    registry:
+      url: "docker://quay.io/nirsof/cirros:0.6.2-1"

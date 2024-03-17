@@ -1,0 +1,49 @@
+# PVC based test vm.
+---
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: vm
+spec:
+  running: true
+  template:
+    metadata:
+      labels:
+        kubevirt.io/size: small
+        kubevirt.io/domain: vm
+    spec:
+      domain:
+        devices:
+          disks:
+            - name: root-disk
+              disk:
+                bus: virtio
+            - name: cloud-init
+              disk:
+                bus: virtio
+          interfaces:
+            - name: default
+              model: virtio
+        resources:
+          requests:
+            # See https://github.com/cirros-dev/cirros/issues/53
+            memory: 256Mi
+      networks:
+        - name: default
+          pod: {}
+      accessCredentials:
+        - sshPublicKey:
+            source:
+              secret:
+                secretName: my-public-key
+            propagationMethod:
+              configDrive: {}
+      volumes:
+        - name: root-disk
+          persistentVolumeClaim:
+            claimName: root-disk
+        - name: cloud-init
+          cloudInitConfigDrive:
+            userData: |
+              #!/bin/sh
+              echo "Running user-data script"

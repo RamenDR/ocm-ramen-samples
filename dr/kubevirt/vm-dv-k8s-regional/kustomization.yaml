@@ -1,0 +1,6 @@
+---
+resources:
+  - ../base
+namespace: vm-dv
+commonLabels:
+  app: vm-dv

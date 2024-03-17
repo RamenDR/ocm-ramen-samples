@@ -59,6 +59,7 @@ Kubernetes and OpenShift.
 - deployment - busybox deployment
 - kubevirt
   - vm-pvc - PVC based VM
+  - vm-dv - DataVolume based VM
 
 ## Deploying a sample application
 
