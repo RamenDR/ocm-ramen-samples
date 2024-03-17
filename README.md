@@ -60,6 +60,7 @@ Kubernetes and OpenShift.
 - kubevirt
   - vm-pvc - PVC based VM
   - vm-dv - DataVolume based VM
+  - vm-dvt - DataVolumeTemplate based VM
 
 ## Deploying a sample application
 
