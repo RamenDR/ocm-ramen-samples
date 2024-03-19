@@ -1,0 +1,31 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: busybox
+spec:
+  template:
+    spec:
+      containers:
+        - name: logger
+          command:
+            - sh
+            - -c
+            - |
+              emit() {
+                  echo "$(date) $1" | tee -a /var/log/ramen.log /var/anotherlog/ramen.log
+                  sync
+              }
+              trap "emit STOP; exit" TERM
+              emit START
+              while true; do
+                  sleep 10 & wait
+                  emit UPDATE
+              done
+          volumeMounts:
+            - name: anothervarlog
+              mountPath: /var/anotherlog
+      volumes:
+        - name: anothervarlog
+          persistentVolumeClaim:
+            claimName: busybox-another-pvc
