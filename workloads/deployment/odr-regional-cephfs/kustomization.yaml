@@ -1,4 +1,6 @@
 ---
+commonLabels:
+  appname: busybox
 resources:
   - ../base
   - addtional-pvc.yaml
