@@ -1,6 +1,9 @@
 ---
 resources:
   - ../base
+  - addtional-pvc.yaml
+patchesStrategicMerge:
+  - deployment.yaml
 patches:
   # Customize for internal cephfs storage.
   - target:
