@@ -4,3 +4,5 @@ kind: Namespace
 metadata:
   # Customize in your overlay.
   name: NAMESPACE
+  annotations:
+    volsync.backube/privileged-movers: "true"
