@@ -1,0 +1,14 @@
+---
+resources:
+  - ../base-odr
+namespace: vm-pvc
+commonLabels:
+  app: vm-pvc
+patches:
+  - target:
+      kind: Subscription
+      name: subscription
+    patch: |-
+      - op: replace
+        path: /metadata/annotations/apps.open-cluster-management.io~1github-path
+        value: workloads/kubevirt/vm-pvc/odr-regional
