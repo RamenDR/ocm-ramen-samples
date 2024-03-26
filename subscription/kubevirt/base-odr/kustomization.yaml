@@ -1,0 +1,23 @@
+---
+resources:
+  - ../../base
+patches:
+  # You many need to modify based on the actual clusterset name.
+  - target:
+      kind: ManagedClusterSetBinding
+      name: default
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: submariner
+      - op: replace
+        path: /spec/clusterSet
+        value: submariner
+  # You many need to modify based on the actual clusterset name.
+  - target:
+      kind: Placement
+      name: placement
+    patch: |-
+      - op: replace
+        path: /spec/clusterSets/0
+        value: submariner
