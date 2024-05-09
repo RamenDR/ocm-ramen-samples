@@ -6,4 +6,4 @@ metadata:
   namespace: ramen-samples
 spec:
   type: GitHub
-  pathname: https://github.com/RamenDR/ocm-ramen-samples.git
+  pathname: https://github.com/keslerzhu/ocm-ramen-samples.git
