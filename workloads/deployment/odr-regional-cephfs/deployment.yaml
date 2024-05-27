@@ -13,7 +13,7 @@ spec:
             - -c
             - |
               emit() {
-                  echo "$(date) $1" | tee -a /var/log/ramen.log /var/anotherlog/ramen.log
+                  echo "$(date) $1" | tee -a /var/log/ramen.log /var/anotherlog/ramen.log /var/cgpvc1/ramen.log /var/cgpvc2/ramen.log
                   sync
               }
               trap "emit STOP; exit" TERM
@@ -25,7 +25,17 @@ spec:
           volumeMounts:
             - name: anothervarlog
               mountPath: /var/anotherlog
+            - name: cgpvc1
+              mountPath: /var/cgpvc1
+            - name: cgpvc2
+              mountPath: /var/cgpvc2
       volumes:
         - name: anothervarlog
           persistentVolumeClaim:
             claimName: busybox-another-pvc
+        - name: cgpvc1
+          persistentVolumeClaim:
+            claimName: busybox-cg-pvc1
+        - name: cgpvc2
+          persistentVolumeClaim:
+            claimName: busybox-cg-pvc2

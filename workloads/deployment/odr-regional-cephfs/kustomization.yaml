@@ -4,6 +4,7 @@ commonLabels:
 resources:
   - ../base
   - addtional-pvc.yaml
+  - pvc-in-cg.yaml
 patchesStrategicMerge:
   - deployment.yaml
 patches:
