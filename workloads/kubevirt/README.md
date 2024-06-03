@@ -24,7 +24,7 @@ the included SSH public key with your own public key.
 1. If you are not using the `main` branch update
    `subscription/base/subscription.yaml` to point to the right branch.
 
-## Deploying the VM subscription
+## Deploying an OCM managed VM
 
 To start a PVC based VM `vm-pvc` use the
 `subscription/kubevirt/vm-pvc-k8s-regional` overlay:
@@ -89,7 +89,7 @@ NAME                                          PROVISIONED  USED
 csi-vol-a3fdb384-2e31-49f1-bd48-a97b2d79f981      128 MiB  80 MiB
 ```
 
-## Enabling DR for the VM
+## Enabling DR for an OCM managed VM
 
 To allow *Ramen* to protect the VM, you need to disable *OCM*
 scheduling by adding an annotation to the VM placement:
@@ -209,7 +209,7 @@ csi-vol-a3fdb384-2e31-49f1-bd48-a97b2d79f981      128 MiB  80 MiB
 In case of a disaster in the primary cluster, we can start the VM using
 the replica on the secondary cluster.
 
-## Failing over to another cluster
+## Failing over an OCM managed VM to another cluster
 
 In case of disaster you can force the VM to run on the other cluster.
 The VM will start on the other cluster using the data from the last
@@ -351,7 +351,7 @@ kubectl wait drpc drpc \
     --context hub
 ```
 
-## Disable DR for the VM
+## Disable DR for an OCM managed VM
 
 Delete the `dr` resources to disable DR:
 
@@ -372,7 +372,7 @@ kubectl annotate placement placement \
 At this point *OCM* controls the VM and the storage used for replicating
 the VM data on the DR clusters will be reclaimed.
 
-## Undeploying the VM
+## Undeploying an OCM managed VM
 
 Delete the subscription to stop and delete the VM:
 

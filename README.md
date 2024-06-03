@@ -62,7 +62,41 @@ Kubernetes and OpenShift.
   - vm-dv - DataVolume based VM
   - vm-dvt - DataVolumeTemplate based VM
 
-## Deploying a sample application
+## Managed and discovered applications
+
+*Ramen* can protect *OCM managed applications* and *OCM discovered
+applications*.
+
+### OCM managed applications
+
+Deployed and undeployed by *OCM*, using either *Subsription* or
+*ApplciationSet* resources. *Ramen* take ownership of the application
+when enabling DR, and return ownership to OCM when disabling DR. When DR
+is enabled, *Ramen* control the placement of the application and backup
+and restore the application PVCs.
+
+When failing over or relocating an *OCM managed application* to another
+cluster, *OCM* delete the application from the cluster and deploy it on
+the other cluster.
+
+### OCM discovered applications*
+
+Deployed and undeployed by a user on a cluster using declarative or
+imperative means. An example is deploying one of the workloads in this
+repository using kubectl. Another example is creating a virtual machine
+using KubeVirt console.
+
+*Ramen* take ownership of the application when enabling DR and return
+ownership of the application when disabling DR. When DR is enabled,
+*Ramen* control the application placement and backup and restore the
+application resources based provided *DRPlacementControl* resoruce.
+
+When failing over or relocating a discovered application to another
+cluster, *Ramen* deploy the application on the other cluster. However to
+complete the operation, the user must delete the application from the
+cluster since *Ramen* does not support deleting applications.
+
+## Deploying an OCM managed application
 
 In the example we use the busybox deployment for Kubernetes regional DR
 environment using RBD storage:
@@ -108,7 +142,7 @@ the examples.
    kubectl get pod,pvc -n deployment-rbd --context dr1
    ```
 
-## Undeploying a sample application
+## Undeploying an OCM managed application
 
 To undeploy an application delete the subscription overlay used to
 deploy the application:
@@ -117,7 +151,7 @@ deploy the application:
 kubectl delete -k subscription/deployment-k8s-regional-rbd
 ```
 
-## Enable DR for a deployed application
+## Enable DR for a deployed OCM managed application
 
 1. Change the Placement to be reconciled by Ramen
 
@@ -142,7 +176,7 @@ kubectl delete -k subscription/deployment-k8s-regional-rbd
 
    At this point the placement of the application is managed by *Ramen*.
 
-## Disable DR for a DR enabled application
+## Disable DR for a DR enabled OCM managed application
 
 1. Ensure the placement is pointing to the cluster where the workload is
    currently placed to avoid data loss if OCM moves the application to
