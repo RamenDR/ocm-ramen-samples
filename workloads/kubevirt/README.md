@@ -104,7 +104,7 @@ kubectl annotate placement placement \
 Deploy the DR resources to enable DR:
 
 ```sh
-kubectl apply -k dr/kubevirt/vm-pvc-k8s-regional --context hub
+kubectl apply -k dr/managed/kubevirt/vm-pvc-k8s-regional --context hub
 ```
 
 At this point *Ramen* controls the VM placement and protects the VM data
@@ -356,7 +356,7 @@ kubectl wait drpc drpc \
 Delete the `dr` resources to disable DR:
 
 ```sh
-kubectl delete -k dr/kubevirt/vm-pvc-k8s-regional --context hub
+kubectl delete -k dr/managed/kubevirt/vm-pvc-k8s-regional --context hub
 ```
 
 Enable *OCM* scheduling again by deleting the placement annotation we
