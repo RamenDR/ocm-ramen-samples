@@ -1,0 +1,6 @@
+---
+namespace: statefulset-rbd
+commonLabels:
+  app: statefulset-rbd
+resources:
+  - ../base
