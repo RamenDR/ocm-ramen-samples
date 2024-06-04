@@ -1,0 +1,6 @@
+---
+namespace: daemonset-rbd
+commonLabels:
+  app: daemonset-rbd
+resources:
+  - ../base
