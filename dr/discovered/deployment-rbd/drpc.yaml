@@ -1,0 +1,26 @@
+---
+apiVersion: ramendr.openshift.io/v1alpha1
+kind: DRPlacementControl
+metadata:
+  name: drpc
+spec:
+  preferredCluster: dr1
+  drPolicyRef:
+    name: dr-policy
+  placementRef:
+    kind: Placement
+    # Match kustomization namePrefix
+    name: deployment-rbd-placement
+    namespace: ramen-ops
+  pvcSelector:
+    matchLabels:
+      appname: busybox
+  protectedNamespaces:
+    - deployment-rbd
+  kubeObjectProtection:
+    kubeObjectSelector:
+      matchExpressions:
+        - key: appname
+          operator: In
+          values:
+            - busybox

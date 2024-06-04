@@ -1,0 +1,6 @@
+apiVersion: cluster.open-cluster-management.io/v1beta1
+kind: PlacementDecision
+metadata:
+  labels:
+    cluster.open-cluster-management.io/placement: deployment-rbd-placement
+  name: placement-decision
