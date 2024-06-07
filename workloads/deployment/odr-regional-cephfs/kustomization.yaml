@@ -15,7 +15,7 @@ patches:
     patch: |-
       - op: replace
         path: /spec/storageClassName
-        value: ocs-storagecluster-cephfs
+        value: rook-cephfs
       - op: replace
         path: /spec/accessModes
         value:
