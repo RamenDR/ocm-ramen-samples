@@ -9,7 +9,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   # Customize in your overlay.
-  storageClassName: STORAGE_CLASS_NAME
+  storageClassName: rook-cephfs
   resources:
     requests:
       storage: 1Gi
