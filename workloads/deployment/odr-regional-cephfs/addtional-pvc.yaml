@@ -2,7 +2,9 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: busybox-another-pvc
+  name: busybox-cg2-pvc1
+  labels:
+    "cg": "cg2"
 spec:
   accessModes:
     - ReadWriteOnce

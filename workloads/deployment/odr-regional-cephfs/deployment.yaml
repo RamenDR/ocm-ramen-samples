@@ -32,10 +32,10 @@ spec:
       volumes:
         - name: anothervarlog
           persistentVolumeClaim:
-            claimName: busybox-another-pvc
+            claimName:  busybox-cg2-pvc1
         - name: cgpvc1
           persistentVolumeClaim:
-            claimName: busybox-cg-pvc1
+            claimName: busybox-cg1-pvc1
         - name: cgpvc2
           persistentVolumeClaim:
-            claimName: busybox-cg-pvc2
+            claimName: busybox-cg1-pvc2

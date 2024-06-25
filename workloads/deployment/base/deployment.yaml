@@ -37,4 +37,4 @@ spec:
       volumes:
         - name: varlog
           persistentVolumeClaim:
-            claimName: busybox-pvc
+            claimName: busybox-cg2-pvc2
