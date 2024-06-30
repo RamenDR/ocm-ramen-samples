@@ -144,14 +144,6 @@ kubectl delete -k subscription/deployment-k8s-regional-rbd
 
 ## Disable DR for a DR enabled application
 
-1. Ensure the placement is pointing to the cluster where the workload is
-   currently placed to avoid data loss if OCM moves the application to
-   another cluster.
-
-   The sample `placement` does not require any change, but if you are
-   using an application created by OpenShift Console, you may need to
-   change the cluster name in the placement.
-
 1. Delete the drpc resource for the OCM application on the hub:
 
    ```
@@ -161,11 +153,52 @@ kubectl delete -k subscription/deployment-k8s-regional-rbd
    This deletes the DRPlacementControl resource for the busybox
    deployment, disabling replication and removing replicated data.
 
-1. Change the Placement to be reconciled by OCM
+> [!IMPORTANT]
+> Do not delete the Placement annotation
+> `cluster.open-cluster-management.io/experimental-scheduling-disable`
+> to ensure that OCM will not change the placement of the application,
+> which can result in data loss.
 
-   ```
-   kubectl annotate placement placement -n deployment-rbd \
-       cluster.open-cluster-management.io/experimental-scheduling-disable-
-   ```
+### Optional: enabling OCM scheduling for the application
 
-   At this point the application is managed again by *OCM*.
+It is not recommended to enable OCM scheduling on after disabling DR,
+since OCM does not support moving workload storage between clusters.  If
+the placement point to wrong cluster, OCM will delete the application
+and its storage from the current cluster, and deploy the application
+with new storage on the cluster selected by the placement.
+
+Find the current placement of the application:
+
+```
+kubectl get placementdecisions -n deployment-rbd --context hub \
+    -o jsonpath='{.items[0].status.decisions[0].clusterName}{"\n"}'
+```
+
+Ensure that the `Placement` predicates is pointing to the cluster where
+the workload is currently placed. Here is example predicates selecting
+the cluster `dr1`:
+
+```
+spec:
+  clusterSets:
+  - default
+  numberOfClusters: 1
+  predicates:
+  - requiredClusterSelector:
+      claimSelector: {}
+      labelSelector:
+        matchExpressions:
+        - key: name
+          operator: In
+          values:
+          - dr1
+```
+
+Change the Placement to be reconciled by OCM:
+
+```
+kubectl annotate placement placement -n deployment-rbd \
+    cluster.open-cluster-management.io/experimental-scheduling-disable-
+```
+
+At this point the application is managed again by *OCM*.
