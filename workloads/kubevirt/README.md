@@ -359,18 +359,16 @@ Delete the `dr` resources to disable DR:
 kubectl delete -k dr/kubevirt/vm-pvc-k8s-regional --context hub
 ```
 
-Enable *OCM* scheduling again by deleting the placement annotation we
-added before:
+At this point ramen is not protecting the virtual machine, and the
+storage used for replicating the virtual machine data on the DR clusters
+will be reclaimed.  The virtual machine will continue to run on the
+current cluster.
 
-```sh
-kubectl annotate placement placement \
-    cluster.open-cluster-management.io/experimental-scheduling-disable- \
-    --namespace vm-pvc \
-    --context hub
-```
-
-At this point *OCM* controls the VM and the storage used for replicating
-the VM data on the DR clusters will be reclaimed.
+> [!IMPORTANT]
+> Do not delete the Placement annotation
+> `cluster.open-cluster-management.io/experimental-scheduling-disable`
+> to ensure that OCM will not change the placement of the virtual
+> machine, which can result in data loss.
 
 ## Undeploying the VM
 
