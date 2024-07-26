@@ -4,7 +4,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: busybox-cg1-pvc1
   labels:
-    "cg": "cg1"
+    "ramendr.openshift.io/consistency-group": "cg1"
 spec:
   accessModes:
     - ReadWriteOnce
@@ -19,7 +19,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: busybox-cg1-pvc2
   labels:
-    "cg": "cg1"
+    "ramendr.openshift.io/consistency-group": "cg1"
 spec:
   accessModes:
     - ReadWriteOnce
