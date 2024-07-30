@@ -14,4 +14,4 @@ patches:
       # Use internal ceph cluster.
       - op: replace
         path: /spec/dataVolumeTemplates/0/spec/storage/storageClassName
-        value: ocs-storagecluster-ceph-rbd
+        value: ocs-storagecluster-ceph-rbd-virtualization
