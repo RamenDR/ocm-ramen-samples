@@ -1,0 +1,10 @@
+---
+apiVersion: cdi.kubevirt.io/v1beta1
+kind: VolumeImportSource
+metadata:
+  name: win2k22-source
+spec:
+  source:
+    registry:
+      # Replace with URL of a Windows container disk.
+      url: "docker://REGISTRY/REPO/IMAGE:TAG"

@@ -1,0 +1,21 @@
+# Kustomization for Ramen test enviroment.
+---
+resources:
+  - ../base
+patches:
+  # Use bridge network interface, required for minikube.
+  - target:
+      kind: VirtualMachine
+      name: win2k22
+    patch: |-
+      - op: add
+        path: /spec/template/spec/domain/devices/interfaces/0/bridge
+        value: {}
+  # Use internal ceph cluster.
+  - target:
+      kind: PersistentVolumeClaim
+      name: root-disk
+    patch: |-
+      - op: replace
+        path: /spec/storageClassName
+        value: rook-ceph-block
