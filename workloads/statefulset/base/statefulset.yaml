@@ -1,0 +1,55 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: busybox
+spec:
+  # Required for proper clean up on failover and successful relocate. You
+  # must enable the StatefulSetAutoDeletePVC feature gate for this.
+  # https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#persistentvolumeclaim-retention
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Delete
+    whenScaled: Retain
+  selector:
+    matchLabels:
+      appname: busybox
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        appname: busybox
+    spec:
+      containers:
+        - name: logger
+          image: quay.io/nirsof/busybox:stable
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - |
+              emit() {
+                  echo "$(date) $1" | tee -a /var/log/ramen.log
+                  sync
+              }
+              trap "emit STOP; exit" TERM
+              emit START
+              while true; do
+                  sleep 10 & wait
+                  emit UPDATE
+              done
+          volumeMounts:
+            - name: varlog
+              mountPath: /var/log
+  volumeClaimTemplates:
+    - metadata:
+        name: varlog
+        labels:
+          appname: busybox
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        # Customize in your overlay.
+        storageClassName: STORAGE_CLASS_NAME
+        resources:
+          requests:
+            storage: 1Gi
