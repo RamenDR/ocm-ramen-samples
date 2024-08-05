@@ -1,0 +1,2 @@
+FROM scratch
+ADD fedora.qcow2 /disk/

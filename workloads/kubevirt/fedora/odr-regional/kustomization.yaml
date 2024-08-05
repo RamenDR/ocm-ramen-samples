@@ -1,0 +1,21 @@
+# Kustomization for OpenShift Regional DR environment.
+---
+resources:
+  - ../base
+patches:
+  # Use masquerade network interface.
+  - target:
+      kind: VirtualMachine
+      name: fedora
+    patch: |-
+      - op: add
+        path: /spec/template/spec/domain/devices/interfaces/0/masquerade
+        value: {}
+  # Use internal ceph cluster.
+  - target:
+      kind: PersistentVolumeClaim
+      name: fedora
+    patch: |-
+      - op: replace
+        path: /spec/storageClassName
+        value: ocs-storagecluster-ceph-rbd-virtualization
