@@ -2,5 +2,6 @@
 resources:
   - ../base
 namespace: vm-dv
-commonLabels:
-  app: vm-dv
+labels:
+  - pairs:
+      app: vm-dv

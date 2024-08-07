@@ -1,8 +1,9 @@
 ---
 resources:
   - ../../base
-commonLabels:
-  appname: vm
+labels:
+  - pairs:
+      appname: vm
 patches:
   # Override appname to match our our label.
   - target:

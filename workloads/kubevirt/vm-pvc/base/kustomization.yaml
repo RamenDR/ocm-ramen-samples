@@ -3,8 +3,9 @@ resources:
   - source.yaml
   - pvc.yaml
   - vm.yaml
-commonLabels:
-  appname: vm
+labels:
+  - pairs:
+      appname: vm
 secretGenerator:
   - name: my-public-key
     files:
