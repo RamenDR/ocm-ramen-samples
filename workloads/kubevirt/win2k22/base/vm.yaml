@@ -1,0 +1,73 @@
+---
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: win2k22
+spec:
+  running: true
+  template:
+    metadata:
+      annotations:
+        vm.kubevirt.io/flavor: large
+        vm.kubevirt.io/os: windows2k22
+        vm.kubevirt.io/workload: server
+      labels:
+        kubevirt.io/size: large
+        kubevirt.io/domain: win2k22
+    spec:
+      domain:
+        cpu:
+          cores:
+            4
+        clock:
+          timer:
+            hpet:
+              present: false
+            hyperv: {}
+            pit:
+              tickPolicy: delay
+            rtc:
+              tickPolicy: catchup
+          utc: {}
+        features:
+          acpi: {}
+          apic: {}
+          hyperv:
+            frequencies: {}
+            ipi: {}
+            reenlightenment: {}
+            relaxed: {}
+            reset: {}
+            runtime: {}
+            spinlocks:
+              spinlocks: 8191
+            synic: {}
+            synictimer:
+              direct: {}
+            tlbflush: {}
+            vapic: {}
+            vpindex: {}
+          smm: {}
+        devices:
+          disks:
+            - name: root-disk
+              disk:
+                bus: virtio
+          inputs:
+            # Required for correct mouse tracking in VNC.
+            - bus: usb
+              name: tablet
+              type: tablet
+          interfaces:
+            - name: default
+              model: virtio
+        resources:
+          requests:
+            memory: 8Gi
+      networks:
+        - name: default
+          pod: {}
+      volumes:
+        - name: root-disk
+          persistentVolumeClaim:
+            claimName: root-disk

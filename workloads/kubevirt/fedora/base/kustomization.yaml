@@ -3,11 +3,12 @@ resources:
   - source.yaml
   - pvc.yaml
   - vm.yaml
+  - service.yaml
 labels:
   - pairs:
       appname: vm
 secretGenerator:
-  - name: my-public-key
+  - name: fedora
     files:
       - test_rsa.pub
 generatorOptions:

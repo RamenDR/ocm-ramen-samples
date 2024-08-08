@@ -2,8 +2,9 @@
 resources:
   - vm.yaml
   - dv.yaml
-commonLabels:
-  appname: vm
+labels:
+  - pairs:
+      appname: vm
 secretGenerator:
   - name: my-public-key
     files:

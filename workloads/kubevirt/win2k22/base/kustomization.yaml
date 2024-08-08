@@ -1,0 +1,9 @@
+---
+resources:
+  - source.yaml
+  - pvc.yaml
+  - vm.yaml
+  - service.yaml
+labels:
+  - pairs:
+      appname: vm

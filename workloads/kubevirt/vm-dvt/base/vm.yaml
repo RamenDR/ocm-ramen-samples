@@ -9,7 +9,7 @@ spec:
   template:
     metadata:
       labels:
-        kubevirt.io/size: small
+        kubevirt.io/size: tiny
         kubevirt.io/domain: vm
     spec:
       domain:

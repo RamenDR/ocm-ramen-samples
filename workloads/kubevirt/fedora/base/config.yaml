@@ -1,0 +1,11 @@
+# To inject the managed cluster name into the VM, create this config map in the
+# application namespace in all clusters before deploying the VM.
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fedora
+data:
+  # Replace with the actual managed cluster name.
+  cluster: MANAGED_CLUSTER_NAME

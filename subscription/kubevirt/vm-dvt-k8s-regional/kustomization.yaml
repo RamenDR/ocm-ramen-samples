@@ -2,8 +2,9 @@
 resources:
   - ../../base
 namespace: vm-dvt
-commonLabels:
-  app: vm-dvt
+labels:
+  - pairs:
+      app: vm-dvt
 patches:
   - target:
       kind: Subscription

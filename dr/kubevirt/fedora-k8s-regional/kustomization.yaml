@@ -1,7 +1,7 @@
 ---
 resources:
   - ../base
-namespace: vm-dvt
+namespace: fedora
 labels:
   - pairs:
-      app: vm-dvt
+      app: fedora

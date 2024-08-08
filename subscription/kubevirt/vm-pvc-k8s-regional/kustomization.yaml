@@ -2,8 +2,9 @@
 resources:
   - ../../base
 namespace: vm-pvc
-commonLabels:
-  app: vm-pvc
+labels:
+  - pairs:
+      app: vm-pvc
 patches:
   - target:
       kind: Subscription
