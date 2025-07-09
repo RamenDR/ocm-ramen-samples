@@ -1,0 +1,17 @@
+---
+apiVersion: cluster.open-cluster-management.io/v1beta1
+kind: Placement
+metadata:
+  name: APPSET_NAME  # Replace in overlay with ApplicationSet name (must match)
+  namespace: argocd
+  labels:
+    cluster.open-cluster-management.io/placement: APPSET_NAME  # Replace in overlay with ApplicationSet name
+spec:
+  numberOfClusters: 1
+  clusterSets:
+    - default
+  predicates:
+    - requiredClusterSelector:
+        labelSelector:
+          matchLabels:
+            name: dr1  # Default target cluster (can be overridden in overlay)

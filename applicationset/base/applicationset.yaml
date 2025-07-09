@@ -1,0 +1,33 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: APPSET_NAME  # Replace in overlay with unique ApplicationSet name
+  namespace: argocd
+spec:
+  generators:
+  - clusterDecisionResource:
+      configMapRef: APPSET_NAME  # Replace in overlay with ApplicationSet name
+      labelSelector:
+        matchLabels:
+          cluster.open-cluster-management.io/placement: APPSET_NAME  # Replace in overlay with Placement name
+      requeueAfterSeconds: 180
+  template:
+    metadata:
+      name: 'UNIQUE_APP_NAME-{{name}}'  # Replace in overlay with application name pattern
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/RamenDR/ocm-ramen-samples.git
+        targetRevision: main
+        path: WORKLOAD_PATH  # Replace in overlay with workload source path
+      destination:
+        server: '{{server}}'
+        namespace: DESTINATION_NAMESPACE  # Replace in overlay with target namespace
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - PruneLast=true
