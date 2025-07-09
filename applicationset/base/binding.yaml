@@ -1,0 +1,9 @@
+---
+apiVersion: cluster.open-cluster-management.io/v1beta2
+kind: ManagedClusterSetBinding
+metadata:
+  name: default  # Binds to the 'default' ManagedClusterSet
+  namespace: argocd
+spec:
+  clusterSet: default  # Change this if your ManagedClusterSet has a different name
+

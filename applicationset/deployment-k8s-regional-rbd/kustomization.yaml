@@ -1,0 +1,58 @@
+---
+resources:
+  - ../base
+commonLabels:
+  app: deployment-rbd
+patches:
+  - target:
+      kind: ApplicationSet
+      name: APPSET_NAME
+    patch: |-
+      # ApplicationSet name
+      - op: replace
+        path: /metadata/name
+        value: deployment-rbd-appset
+      # ConfigMap reference
+      - op: replace
+        path: /spec/generators/0/clusterDecisionResource/configMapRef
+        value: deployment-rbd-appset
+      # Placement label selector
+      - op: replace
+        path: /spec/generators/0/clusterDecisionResource/labelSelector/matchLabels/cluster.open-cluster-management.io~1placement
+        value: deployment-rbd-appset
+      # Workload path
+      - op: replace
+        path: /spec/template/spec/source/path
+        value: workloads/deployment/k8s-regional-rbd
+      # Target namespace
+      - op: replace
+        path: /spec/template/spec/destination/namespace
+        value: deployment-rbd
+      # Application name template
+      - op: replace
+        path: /spec/template/metadata/name
+        value: deployment-rbd-appset-{{name}}
+  - target:
+      kind: Placement
+      name: APPSET_NAME
+    patch: |-
+      # Placement name
+      - op: replace
+        path: /metadata/name
+        value: deployment-rbd-appset
+      # Placement label
+      - op: replace
+        path: /metadata/labels/cluster.open-cluster-management.io~1placement
+        value: deployment-rbd-appset
+  - target:
+      kind: ConfigMap
+      name: APPSET_NAME
+    patch: |-
+      # ConfigMap name
+      - op: replace
+        path: /metadata/name
+        value: deployment-rbd-appset
+      # ConfigMap label
+      - op: replace
+        path: /metadata/labels/cluster.open-cluster-management.io~1placement
+        value: deployment-rbd-appset

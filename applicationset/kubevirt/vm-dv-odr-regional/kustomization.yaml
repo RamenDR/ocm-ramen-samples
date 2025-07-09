@@ -1,0 +1,58 @@
+---
+resources:
+  - ../../base
+commonLabels:
+  app: vm-dv-odr
+patches:
+  - target:
+      kind: ApplicationSet
+      name: APPSET_NAME
+    patch: |-
+      # ApplicationSet name
+      - op: replace
+        path: /metadata/name
+        value: vm-dv-odr-appset
+      # ConfigMap reference
+      - op: replace
+        path: /spec/generators/0/clusterDecisionResource/configMapRef
+        value: vm-dv-odr-appset
+      # Placement label selector
+      - op: replace
+        path: /spec/generators/0/clusterDecisionResource/labelSelector/matchLabels/cluster.open-cluster-management.io~1placement
+        value: vm-dv-odr-appset
+      # Workload path
+      - op: replace
+        path: /spec/template/spec/source/path
+        value: workloads/kubevirt/vm-dv/odr-regional
+      # Target namespace
+      - op: replace
+        path: /spec/template/spec/destination/namespace
+        value: vm-dv-odr
+      # Application name template
+      - op: replace
+        path: /spec/template/metadata/name
+        value: vm-dv-odr-appset-{{name}}
+  - target:
+      kind: Placement
+      name: APPSET_NAME
+    patch: |-
+      # Placement name
+      - op: replace
+        path: /metadata/name
+        value: vm-dv-odr-appset
+      # Placement label
+      - op: replace
+        path: /metadata/labels/cluster.open-cluster-management.io~1placement
+        value: vm-dv-odr-appset
+  - target:
+      kind: ConfigMap
+      name: APPSET_NAME
+    patch: |-
+      # ConfigMap name
+      - op: replace
+        path: /metadata/name
+        value: vm-dv-odr-appset
+      # ConfigMap label
+      - op: replace
+        path: /metadata/labels/cluster.open-cluster-management.io~1placement
+        value: vm-dv-odr-appset

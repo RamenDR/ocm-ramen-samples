@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: APPSET_NAME  # Replace in overlay with ApplicationSet name (must match)
+  namespace: argocd
+  labels:
+    cluster.open-cluster-management.io/placement: APPSET_NAME  # Replace in overlay with ApplicationSet name
+data:
+  # ConfigMap metadata required by ArgoCD clusterDecisionResource generator
+  apiVersion: "cluster.open-cluster-management.io/v1beta1"
+  kind: "placementdecisions"
+  statusListKey: "decisions"
+  matchKey: "clusterName"
