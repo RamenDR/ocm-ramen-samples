@@ -1,8 +1,9 @@
 ---
 resources:
   - ../../base
-commonLabels:
-  app: vm-pvc-k8s
+labels:
+  - pairs:
+      app: vm-pvc
 patches:
   - target:
       kind: ApplicationSet
