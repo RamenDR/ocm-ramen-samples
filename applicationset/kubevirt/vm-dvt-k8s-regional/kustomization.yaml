@@ -1,8 +1,9 @@
 ---
 resources:
   - ../../base
-commonLabels:
-  app: vm-dvt-k8s
+labels:
+  - pairs:
+      app: vm-dvt
 patches:
   - target:
       kind: ApplicationSet

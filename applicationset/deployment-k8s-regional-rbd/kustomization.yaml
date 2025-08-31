@@ -1,8 +1,9 @@
 ---
 resources:
   - ../base
-commonLabels:
-  app: deployment-rbd
+labels:
+  - pairs:
+      app: deployment-rbd
 patches:
   - target:
       kind: ApplicationSet

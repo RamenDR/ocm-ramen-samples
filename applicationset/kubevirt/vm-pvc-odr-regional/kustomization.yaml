@@ -1,8 +1,9 @@
 ---
 resources:
   - ../../base
-commonLabels:
-  app: vm-pvc-odr
+labels:
+  - pairs:
+      app: vm-pvc-odr
 patches:
   - target:
       kind: ApplicationSet

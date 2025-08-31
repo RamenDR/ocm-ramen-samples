@@ -1,8 +1,9 @@
 ---
 resources:
   - ../../base
-commonLabels:
-  app: vm-dvt-odr
+labels:
+  - pairs:
+      app: vm-dvt-odr
 patches:
   - target:
       kind: ApplicationSet
