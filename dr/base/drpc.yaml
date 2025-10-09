@@ -6,7 +6,7 @@ metadata:
 spec:
   preferredCluster: dr1
   drPolicyRef:
-    name: dr-policy
+    name: dr-policy-1m
   placementRef:
     kind: Placement
     name: placement
