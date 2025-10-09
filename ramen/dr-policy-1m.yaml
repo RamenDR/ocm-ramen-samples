@@ -2,7 +2,7 @@
 apiVersion: ramendr.openshift.io/v1alpha1
 kind: DRPolicy
 metadata:
-  name: dr-policy
+  name: dr-policy-1m
 spec:
   drClusters:
     - dr1

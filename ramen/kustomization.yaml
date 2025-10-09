@@ -1,4 +1,4 @@
 ---
 resources:
   - dr-clusters.yaml
-  - dr-policy.yaml
+  - dr-policy-1m.yaml
