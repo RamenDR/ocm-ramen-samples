@@ -1,0 +1,11 @@
+---
+resources:
+  - ../base
+patches:
+  - target:
+      kind: PersistentVolumeClaim
+      name: busybox-pvc
+    patch: |-
+      - op: replace
+        path: /spec/storageClassName
+        value: rook-ceph-block

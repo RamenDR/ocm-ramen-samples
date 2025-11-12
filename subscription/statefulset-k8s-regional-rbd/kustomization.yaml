@@ -1,0 +1,15 @@
+---
+resources:
+  - ../base
+namespace: statefulset-rbd
+commonLabels:
+  app: statefulset-rbd
+patches:
+  # Customize path to application.
+  - target:
+      kind: Subscription
+      name: subscription
+    patch: |-
+      - op: replace
+        path: /metadata/annotations/apps.open-cluster-management.io~1github-path
+        value: workloads/statefulset/k8s-regional-rbd
