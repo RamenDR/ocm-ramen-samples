@@ -1,6 +1,0 @@
----
-resources:
-  - namespace.yaml
-  - binding.yaml
-  - placement.yaml
-  - subscription.yaml
