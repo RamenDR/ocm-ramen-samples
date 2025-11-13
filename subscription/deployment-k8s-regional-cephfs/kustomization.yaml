@@ -1,0 +1,15 @@
+---
+resources:
+  - ../base
+namespace: deployment-cephfs
+commonLabels:
+  app: deployment-cephfs
+patches:
+  # Customize path to application.
+  - target:
+      kind: Subscription
+      name: subscription
+    patch: |-
+      - op: replace
+        path: /metadata/annotations/apps.open-cluster-management.io~1github-path
+        value: workloads/deployment/k8s-regional-cephfs
