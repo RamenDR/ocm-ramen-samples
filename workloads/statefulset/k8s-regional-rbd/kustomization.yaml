@@ -1,0 +1,11 @@
+---
+resources:
+  - ../base
+patches:
+  - target:
+      kind: StatefulSet
+      name: busybox
+    patch: |-
+      - op: replace
+        path: /spec/volumeClaimTemplates/0/spec/storageClassName
+        value: rook-ceph-block
