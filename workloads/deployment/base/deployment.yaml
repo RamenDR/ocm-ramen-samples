@@ -22,7 +22,7 @@ spec:
             - -c
             - |
               emit() {
-                  echo "$(date) $1" | tee -a /var/log/ramen.log
+                  echo "$(date) $1" | tee -a /mnt/pvc-1/ramen.log /mnt/pvc-2/ramen.log
                   sync
               }
               trap "emit STOP; exit" TERM
@@ -32,9 +32,15 @@ spec:
                   emit UPDATE
               done
           volumeMounts:
-            - name: varlog
-              mountPath: /var/log
+            - name: pvc-1
+              mountPath: /mnt/pvc-1
+            - name: pvc-2
+              mountPath: /mnt/pvc-2
       volumes:
-        - name: varlog
+        - name: pvc-1
           persistentVolumeClaim:
-            claimName: busybox-pvc
+            claimName: pvc-1
+        - name: pvc-2
+          persistentVolumeClaim:
+            claimName: pvc-2
+       
