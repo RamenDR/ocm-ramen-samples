@@ -1,7 +1,8 @@
 ---
 resources:
   - source.yaml
-  - pvc.yaml
+  - pvc-1.yaml
+  - pvc-2.yaml
   - vm.yaml
 commonLabels:
   appname: vm
