@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data-disk
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 128Mi
+  # Customize in your overlay.
+  storageClassName: STORAGE_CLASS_NAME
+  volumeMode: Block
+

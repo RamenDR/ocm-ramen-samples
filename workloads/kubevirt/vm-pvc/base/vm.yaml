@@ -18,6 +18,9 @@ spec:
             - name: root-disk
               disk:
                 bus: virtio
+            - name: data-disk
+              disk:
+                bus: virtio
             - name: cloud-init
               disk:
                 bus: virtio
@@ -42,6 +45,9 @@ spec:
         - name: root-disk
           persistentVolumeClaim:
             claimName: root-disk
+        - name: data-disk
+          persistentVolumeClaim:
+            claimName: data-disk
         - name: cloud-init
           cloudInitConfigDrive:
             userData: |

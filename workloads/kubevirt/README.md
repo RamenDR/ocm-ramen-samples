@@ -69,13 +69,16 @@ NAME                                READY   STATUS    RESTARTS   AGE
 pod/virt-launcher-vm-chsrh   1/1     Running   0          5m51s
 
 NAME                                  STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS      AGE
-persistentvolumeclaim/vm-pvc   Bound    pvc-149bd414-c1b8-443c-90f7-7e30fc519eb4   128Mi      RWX            rook-ceph-block   5m51s
+persistentvolumeclaim/data-disk         Bound    pvc-7c2e5d1a-9b44-4f0e-a3d8-52c1e8f6b9a0   128Mi      RWX            rook-ceph-block   5m51s
+persistentvolumeclaim/root-disk         Bound    pvc-149bd414-c1b8-443c-90f7-7e30fc519eb4   128Mi      RWX            rook-ceph-block   5m51s
 ```
+The VM has two PVCs: `root-disk` is the boot disk and `data-disk` is an
+additional empty disk.
 
 At this point there there are no `vrg` and `vr` resources, since we did
 not enable DR for the VM yet.
 
-We can inspect the underlying RBD image backing the VM PVC using the
+We can inspect the underlying RBD image backing the VM PVCs using the
 `rook-ceph` kubectl krew plugin:
 
 ```
@@ -87,6 +90,7 @@ Example output:
 ```console
 NAME                                          PROVISIONED  USED
 csi-vol-a3fdb384-2e31-49f1-bd48-a97b2d79f981      128 MiB  80 MiB
+csi-vol-5e0b7c92-1d6a-4a8f-b3c4-9f2d71e8a604      128 MiB  4 MiB
 ```
 
 ## Enabling DR for the VM
@@ -161,13 +165,15 @@ NAME                                READY   STATUS    RESTARTS   AGE
 pod/virt-launcher-vm-chsrh   1/1     Running   0          16m
 
 NAME                                  STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS      AGE
-persistentvolumeclaim/vm-pvc   Bound    pvc-149bd414-c1b8-443c-90f7-7e30fc519eb4   128Mi      RWX            rook-ceph-block   16m
+persistentvolumeclaim/data-disk         Bound    pvc-7c2e5d1a-9b44-4f0e-a3d8-52c1e8f6b9a0   128Mi      RWX            rook-ceph-block   16m
+persistentvolumeclaim/root-disk         Bound    pvc-149bd414-c1b8-443c-90f7-7e30fc519eb4   128Mi      RWX            rook-ceph-block   16m
 
 NAME                                                        DESIREDSTATE   CURRENTSTATE
 volumereplicationgroup.ramendr.openshift.io/drpc   primary        Primary
 
 NAME                                                               AGE     VOLUMEREPLICATIONCLASS   PVCNAME         DESIREDSTATE   CURRENTSTATE
-volumereplication.replication.storage.openshift.io/vm-pvc   2m46s   vrc-sample               vm-pvc   primary        Primary
+volumereplication.replication.storage.openshift.io/data-disk   2m46s   vrc-sample               data-disk   primary        Primary
+volumereplication.replication.storage.openshift.io/root-disk   2m46s   vrc-sample               root-disk   primary        Primary
 ```
 
 The cirros VM used by this example includes a logger service logging a
@@ -192,7 +198,7 @@ Sun Nov 19 20:14:40 UTC 2023 UPDATE
 Sun Nov 19 20:14:50 UTC 2023 UPDATE
 ```
 
-Ramen set up RBD mirroring for the underlying RBD image. The same image
+Ramen set up RBD mirroring for the underlying RBD images. The same images
 is created on the secondary cluster ("dr2"):
 
 ```
@@ -204,6 +210,7 @@ Example output:
 ```console
 NAME                                          PROVISIONED  USED
 csi-vol-a3fdb384-2e31-49f1-bd48-a97b2d79f981      128 MiB  80 MiB
+csi-vol-5e0b7c92-1d6a-4a8f-b3c4-9f2d71e8a604      128 MiB  4 MiB
 ```
 
 In case of a disaster in the primary cluster, we can start the VM using
